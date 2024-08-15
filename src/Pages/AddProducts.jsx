@@ -42,7 +42,7 @@ const AddProducts = () => {
 
     // Send new product data to the server
     try {
-      const response = await fetch("http://localhost:5000/product", {
+      const response = await fetch("https://server-side-mauve.vercel.app/product", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

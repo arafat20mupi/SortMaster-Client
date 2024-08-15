@@ -6,7 +6,7 @@ const Banner = () => {
     const [datas, setDatas] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/user/last')
+        fetch('https://server-side-mauve.vercel.app/user/last')
             .then((res) => res.json())
             .then((data) => setDatas(data))
     }, [])

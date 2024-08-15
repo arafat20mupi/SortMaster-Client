@@ -18,7 +18,7 @@ const AllItem = () => {
 
     const fetchItems = async (page = 1, limit = 9) => {
         try {
-            const response = await fetch(`http://localhost:5000/users?page=${page}&limit=${limit}`);
+            const response = await fetch(`https://server-side-mauve.vercel.app/users?page=${page}&limit=${limit}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
