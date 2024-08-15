@@ -5,6 +5,7 @@ import AllItem from "../Pages/AllItem";
 import Login from "../Authentication/Login";
 import Signup from "../Authentication/SignUp";
 import PrivateRouter from "./PrivateRouter";
+import AddProducts from "../Pages/AddProducts";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -17,7 +18,6 @@ const router = createBrowserRouter([
         {
           path: '/allItem',
           element: <PrivateRouter><AllItem></AllItem></PrivateRouter>,
-          loader: () => fetch('http://localhost:5000/users'),
         },
         {
           path: '/login',
@@ -26,6 +26,10 @@ const router = createBrowserRouter([
         {
           path: '/signUp',
           element: <Signup></Signup>
+        },
+        {
+          path: '/AddProducts',
+          element: <PrivateRouter><AddProducts></AddProducts></PrivateRouter>
         }
       ]
     },
