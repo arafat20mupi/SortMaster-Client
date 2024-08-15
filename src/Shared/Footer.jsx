@@ -10,7 +10,11 @@ const Footer = () => {
                 </Link>
 
                 <p className="text-sm text-gray-600 dark:text-gray-300">© Copyright 2024. All Rights Reserved.</p>
-
+                <div className="flex gap-4">
+                    <Link className="" to={'/'}>Home</Link>
+                    <Link className="" to={'/allItem'}>All Item</Link>
+                    <Link className="" to={'/AddProducts'}>Add Products</Link>
+                </div>
                 <div className="flex -mx-2">
                     <a href="#" className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400" aria-label="Reddit">
                         <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" fill="none"

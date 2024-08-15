@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const Navber = () => {
-    const { user ,logOut} = useContext(AuthContext)
+    const { user, logOut } = useContext(AuthContext)
     const handleLogOut = () => {
         logOut();
         toast.success('Successfully logout!')
@@ -31,9 +31,9 @@ const Navber = () => {
                     <ul
                         tabIndex={0}
                         className="menu space-y-1 menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                         <li><NavLink to={'/'}>Home</NavLink></li>
-                    <li><NavLink to={'/allItem'}>All Item</NavLink></li>
-                    <li><NavLink to={'/AddProducts'}>Add Products</NavLink></li>
+                        <li><NavLink to={'/'}>Home</NavLink></li>
+                        <li><NavLink to={'/allItem'}>All Item</NavLink></li>
+                        <li><NavLink to={'/AddProducts'}>Add Products</NavLink></li>
                     </ul>
                 </div>
                 <Link to={"/"} className="flex items-center text-xl font-bold gap-2">
@@ -47,18 +47,20 @@ const Navber = () => {
                     <li><NavLink to={'/AddProducts'}>Add Products</NavLink></li>
                 </ul>
             </div>
-            {
-                user ?
-                    <div 
-                    onClick={handleLogOut}
-                     className="navbar-end mr-1 ">
-                        <NavLink >LogOut</NavLink>
-                    </div>
-                    :
-                    <div className="navbar-end mr-1">
-                        <NavLink to={'/login'}>Login</NavLink>
-                    </div>
-            }
+            <div className="flex navbar-end justify-end">
+                {
+                    user ?
+                        <div
+                            onClick={handleLogOut}
+                            className=" btn  ">
+                            <NavLink >LogOut</NavLink>
+                        </div>
+                        :
+                        <div className=" btn ">
+                            <NavLink to={'/login'}>Login</NavLink>
+                        </div>
+                }
+            </div>
 
         </div>
     );
