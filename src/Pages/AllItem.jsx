@@ -104,7 +104,7 @@ const AllItem = () => {
 
     return (
         <div>
-            <div className="mb-4 flex justify-between items-center">
+            <div className="mt-4 flex justify-between items-center">
                 <div className="flex items-center">
                     <label htmlFor="sort">Sort by:</label>
                     <select
@@ -206,10 +206,12 @@ const AllItem = () => {
                 <table className="w-full border-collapse">
                     <thead>
                         <tr>
-                            <th className="py-2 px-4 border-b">Product Name</th>
-                            <th className="py-2 px-4 border-b">Brand Name</th>
-                            <th className="py-2 px-4 border-b">Price</th>
-                            <th className="py-2 px-4 border-b">Date Posted</th>
+                            <th className="py-2 px-4 text-start border-b">Product Name</th>
+                            <th className="py-2 px-4 text-start border-b">Brand Name</th>
+                            <th className="py-2 px-4 text-start border-b">Price</th>
+                            <th className="py-2 px-4 text-start border-b">Date Posted</th>
+                            <th className="py-2 px-4 text-start border-b">Ratings </th>
+                            <th className="py-2 px-4 text-start border-b">Description</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -219,11 +221,14 @@ const AllItem = () => {
                                 <td className="py-2 px-4 border-b">{item.brand_name}</td>
                                 <td className="py-2 px-4 border-b">${item.price}</td>
                                 <td className="py-2 px-4 border-b">{item.date_posted}</td>
+                                <td className="py-2 px-4 border-b">{item.ratings}</td>
+                                <td className="py-2 px-4 border-b">{item.description}</td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
-            )}
+            )
+            }
             <div className="mt-4 flex justify-center items-center">
                 <button
                     onClick={() => handlePageChange(currentPage - 1)}
