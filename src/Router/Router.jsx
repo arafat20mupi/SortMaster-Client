@@ -4,6 +4,7 @@ import Home from "../Pages/Home";
 import AllItem from "../Pages/AllItem";
 import Login from "../Authentication/Login";
 import Signup from "../Authentication/SignUp";
+import PrivateRouter from "./PrivateRouter";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -15,7 +16,8 @@ const router = createBrowserRouter([
         },
         {
           path: '/allItem',
-          element: <AllItem></AllItem>
+          element: <PrivateRouter><AllItem></AllItem></PrivateRouter>,
+          loader: () => fetch('http://localhost:5000/users'),
         },
         {
           path: '/login',

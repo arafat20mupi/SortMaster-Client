@@ -2,12 +2,12 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { GoArrowRight } from "react-icons/go";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { toast } from 'react-toastify';
 import { AuthContext } from "../Provider/AuthProvider";
 import { Helmet } from "react-helmet-async";
+import toast from "react-hot-toast";
 
 const Signup = () => {
-    const { createUser, updateUser, setUser } = useContext(AuthContext);
+    const { createUser, upDateProfile, setUser } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
@@ -18,7 +18,7 @@ const Signup = () => {
         const name = formData.get('name');
         const email = formData.get('email');
         const password = formData.get('password');
-        const photoUrl = formData.get('photo');
+        const photoUrl = formData.get('photo') || "default-photo-url";  // Use a default photo URL if not provided
 
         if (password.length < 6) {
             toast.error("Password must be at least 6 characters", {
@@ -28,51 +28,36 @@ const Signup = () => {
             return;
         }
 
-        if (!/[A-Z]/.test(password)) {
-            toast.error("Must have an Uppercase letter", {
-                position: "top-center",
-                autoClose: 1000
-            });
-            return;
-        }
-
-        if (!/[a-z]/.test(password)) {
-            toast.error("Must have a Lowercase letter", {
-                position: "top-center",
-                autoClose: 1000
-            });
-            return;
-        }
-
         createUser(email, password)
-            .then(() => {
-                // Set user data
-                const userData = {
-                    displayName: name,
-                    photoURL: photoUrl,
-                    email: email,
-                    password: password,
-                };
+            .then((userCredential) => {
+                const user = userCredential.user;
 
                 // Update user data
-                updateUser(userData)
-                    .then(() => {
-                        // Update user successful
-                        setUser(userData);
-                        toast.success("Registered Successfully", {
-                            position: "top-center",
-                            autoClose: 1000
-                        });
-                        navigate("/");
-                    })
-                    .catch(error => {
-                        // Handle update user error
-                        console.error("Error updating user:", error);
-                        toast.error("Failed to update user information", {
-                            position: "top-center",
-                            autoClose: 1000
-                        });
+                upDateProfile(user, {
+                    displayName: name,
+                    photoURL: photoUrl
+                })
+                .then(() => {
+                    // Profile updated successfully
+                    setUser({
+                        ...user,
+                        displayName: name,
+                        photoURL: photoUrl
                     });
+                    toast.success("Registered Successfully", {
+                        position: "top-center",
+                        autoClose: 1000
+                    });
+                    navigate("/");
+                })
+                .catch(error => {
+                    // Handle update user error
+                    console.error("Error updating user:", error);
+                    toast.error("Failed to update user information", {
+                        position: "top-center",
+                        autoClose: 1000
+                    });
+                });
             })
             .catch(() => {
                 toast.error("Already Registered This Account", {
@@ -87,7 +72,7 @@ const Signup = () => {
             <Helmet>
                 <title>Turio/SignUp</title>
             </Helmet>
-            <div className="w-full mx-auto mt-6 max-w-md p-8 space-y-3 rounded-xl bg-gray-50 text-gray-800 ">
+            <div className="w-full mx-auto mt-6 max-w-md p-8 space-y-3 rounded-xl bg-gray-50 text-gray-800">
                 <h1 className="text-2xl font-bold text-center">Sign Up Now</h1>
                 <form onSubmit={handleRegister} className="space-y-6">
                     <div className="space-y-1 text-sm">
@@ -96,7 +81,7 @@ const Signup = () => {
                     </div>
                     <div className="space-y-1 text-sm">
                         <label className="block text-xl font-semibold text-gray-600">Photo URL</label>
-                        <input type="text" name="photo" placeholder="Enter your Photo URL" className="w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-gray-800 focus:border-violet-600" required />
+                        <input type="text" name="photo" placeholder="Enter your Photo URL" className="w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-gray-800 focus:border-violet-600" />
                     </div>
                     <div className="space-y-1 text-sm">
                         <label className="block text-xl font-semibold text-gray-600">Email</label>

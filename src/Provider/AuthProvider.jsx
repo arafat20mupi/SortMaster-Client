@@ -23,16 +23,13 @@ const AuthProvider = ({ children }) => {
         }
     };
 
-    const updateProfileInfo = async (fullName, photoURL) => {
-        try {
-            return await updateProfile(auth.currentUser, {
-                displayName: fullName,
-                photoURL: photoURL,
-            });
-        } catch (error) {
-            throw error;
-        }
+    const upDateProfile = (user, profile) => {
+        return updateProfile(user, {
+            displayName: profile.displayName,
+            photoURL: profile.photoURL,
+        });
     };
+
 
     const signIn = async (email, password) => {
         setLoading(true);
@@ -80,7 +77,7 @@ const AuthProvider = ({ children }) => {
         };
     }, []);
 
-    const authInfo = { user, createUser, signIn, logOut, googleSignIn, resetPassword, loading, updateProfileInfo, setReload }
+    const authInfo = { user,setUser, createUser, signIn, logOut, googleSignIn, resetPassword, loading, upDateProfile, setReload }
 
     return (
         <AuthContext.Provider value={authInfo}>

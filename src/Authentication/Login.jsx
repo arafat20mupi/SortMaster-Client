@@ -2,9 +2,9 @@ import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaGoogle, } from "react-icons/fa";
 import { GoArrowRight } from "react-icons/go";
-import { toast } from 'react-toastify';
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../Provider/AuthProvider";
+import toast from "react-hot-toast";
 
 
 const Login = () => {
