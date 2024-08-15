@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { LuLayoutGrid } from "react-icons/lu";
 import { HiOutlineBars3 } from "react-icons/hi2";
 import ItemCard from "../Components/ItemCard";
-
+import { Helmet } from "react-helmet-async";
 const AllItem = () => {
     const [Items, setItems] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -30,7 +30,6 @@ const AllItem = () => {
             return { result: [], pages: 1 }; // Fallback to empty result
         }
     };
-    console.log(Items);
 
     useEffect(() => {
         const loadItems = async () => {
@@ -104,6 +103,9 @@ const AllItem = () => {
 
     return (
         <div>
+             <Helmet>
+                <title>SortMaster / All Items</title>
+            </Helmet>
             <div className="mt-4 flex justify-between items-center">
                 <div className="flex items-center">
                     <label htmlFor="sort">Sort by:</label>
