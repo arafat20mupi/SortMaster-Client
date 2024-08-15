@@ -7,7 +7,7 @@ const AllItem = () => {
     const [Items, setItems] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [itemsPerPage, setItemsPerPage] = useState(9);
     const [sortOrder, setSortOrder] = useState("asc");
     const [viewMode, setViewMode] = useState("card");
     const [searchQuery, setSearchQuery] = useState("");
@@ -16,15 +16,21 @@ const AllItem = () => {
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState(1000);
 
-    const fetchItems = async (page = 1, limit = 10) => {
+    const fetchItems = async (page = 1, limit = 9) => {
         try {
-            const response = await fetch(`/users?page=${page}&limit=${limit}`);
+            const response = await fetch(`http://localhost:5000/users?page=${page}&limit=${limit}`);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
             const data = await response.json();
             return data;
         } catch (error) {
             console.error('Error fetching items:', error);
+            // You can add additional error handling logic here
+            return { result: [], pages: 1 }; // Fallback to empty result
         }
     };
+    console.log(Items);
 
     useEffect(() => {
         const loadItems = async () => {
@@ -201,6 +207,7 @@ const AllItem = () => {
                     <thead>
                         <tr>
                             <th className="py-2 px-4 border-b">Product Name</th>
+                            <th className="py-2 px-4 border-b">Brand Name</th>
                             <th className="py-2 px-4 border-b">Price</th>
                             <th className="py-2 px-4 border-b">Date Posted</th>
                         </tr>
@@ -209,34 +216,35 @@ const AllItem = () => {
                         {sortedItems.map((item) => (
                             <tr key={item._id}>
                                 <td className="py-2 px-4 border-b">{item.product_name}</td>
+                                <td className="py-2 px-4 border-b">{item.brand_name}</td>
                                 <td className="py-2 px-4 border-b">${item.price}</td>
-                                <td className="py-2 px-4 border-b">{new Date(item.date_posted).toLocaleDateString()}</td>
+                                <td className="py-2 px-4 border-b">{item.date_posted}</td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             )}
-            <div className="pagination-controls mt-4">
+            <div className="mt-4 flex justify-center items-center">
                 <button
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
-                    className="mr-2"
+                    className="px-4 py-2 mx-1 bg-blue-500 text-white rounded disabled:opacity-50"
                 >
                     Previous
                 </button>
-                {Array.from({ length: totalPages }, (_, index) => (
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                     <button
-                        key={index + 1}
-                        onClick={() => handlePageChange(index + 1)}
-                        className={`mr-2 ${index + 1 === currentPage ? 'bg-blue-500 text-white' : ''}`}
+                        key={page}
+                        onClick={() => handlePageChange(page)}
+                        className={`px-4 py-2 mx-1 ${currentPage === page ? "bg-blue-700 text-white" : "bg-blue-500 text-white"}`}
                     >
-                        {index + 1}
+                        {page}
                     </button>
                 ))}
                 <button
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={currentPage === totalPages}
-                    className="ml-2"
+                    className="px-4 py-2 mx-1 bg-blue-500 text-white rounded disabled:opacity-50"
                 >
                     Next
                 </button>
