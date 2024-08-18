@@ -78,7 +78,7 @@ const AddProducts = () => {
       <section className="p-6 dark:text-gray-800">
         <form onSubmit={handleSubmit} className="container w-full max-w-4xl p-8 mx-auto space-y-6 rounded-md shadow bg-gray-200">
           <div>
-            <div className="flex justify-between">
+            <div className="md:flex justify-between">
               <div className="w-full ">
                 <label>Product Name</label>
                 <input
@@ -89,7 +89,7 @@ const AddProducts = () => {
                   className="p-2 w-full rounded focus:outline-none focus:ring focus:ring-opacity-25 focus:ring-violet-600 "
                 />
               </div>
-              <div className="w-full ml-2">
+              <div className="w-full md:ml-2">
                 <label>Brand Name</label>
                 <input
                   name="productsCategory"
@@ -100,7 +100,7 @@ const AddProducts = () => {
                 />
               </div>
             </div>
-            <div className="flex justify-between">
+            <div className="md:flex justify-between">
               <div className="w-full ">
                 <label>Description</label>
                 <input
@@ -111,7 +111,7 @@ const AddProducts = () => {
                   className="p-2 w-full rounded focus:outline-none focus:ring focus:ring-opacity-25 focus:ring-violet-600 "
                 />
               </div>
-              <div className="w-full ml-2">
+              <div className="w-full md:ml-2">
                 <label>Products Price</label>
                 <input
                   name="productsPrice"
@@ -122,7 +122,7 @@ const AddProducts = () => {
                 />
               </div>
             </div>
-            <div className="flex justify-between">
+            <div className="md:flex justify-between">
               <div className="w-full ">
                 <label>Poduct Ratings</label>
                 <input
@@ -147,7 +147,6 @@ const AddProducts = () => {
               </div>
             </div>
           </div>
-
           <button
             type="submit"
             className="w-full bg-gray-800 text-white rounded p-2 mt-4 hover:bg-gray-700 transition duration-300 ease-in-out focus:outline-none focus:ring focus:ring-violet-600 dark:text-white"

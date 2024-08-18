@@ -102,11 +102,11 @@ const AllItem = () => {
     const sortedItems = sortItems(filteredItems, sortOrder);
 
     return (
-        <div>
+        <div className='mt-4'>
              <Helmet>
                 <title>SortMaster / All Items</title>
             </Helmet>
-            <div className="mt-4 flex justify-between items-center">
+            <div className="space-y-2 p-2 md:p-0 md:space-y-0 md:flex md:justify-between items-center">
                 <div className="flex items-center">
                     <label htmlFor="sort">Sort by:</label>
                     <select
@@ -121,21 +121,21 @@ const AllItem = () => {
                         <option value="descDate">Date Added: Newest First</option>
                     </select>
                 </div>
-                <div className="flex items-center">
+                <div className="md:flex  space-y-2 md:space-y-0  items-center">
                     <input
                         type="text"
                         placeholder="Search by Product Name"
                         value={searchQuery}
                         onChange={handleSearchChange}
-                        className="ml-4 p-2 border"
+                        className=" p-2 border"
                     />
-                    <button onClick={toggleViewMode} className="ml-4 btn bg-blue-500 text-white flex items-center">
-                        {viewMode === "card" ? (
+                    <button onClick={toggleViewMode} className="md:ml-4 btn bg-blue-500 text-white flex items-center">
+                        {viewMode === "card" ? ( 
                             <>
                                 <LuLayoutGrid className="mr-1" />
                                 Card View
                             </>
-                        ) : (
+                            )  : (
                             <>
                                 <HiOutlineBars3 className="mr-1" />
                                 Table View
@@ -144,8 +144,8 @@ const AllItem = () => {
                     </button>
                 </div>
             </div>
-            <div className="mb-4 flex justify-between items-center">
-                <div className="flex items-center">
+            <div className="mt-4 p-2 md:p-0  space-y-2 md:space-y-0 md:flex justify-between items-center">
+                <div className="flex  items-center">
                     <label htmlFor="brand">Brand:</label>
                     <select id="brand" className="ml-2 p-2 border" onChange={handleBrandChange}>
                         <option value="">All Brands</option>
@@ -205,7 +205,7 @@ const AllItem = () => {
                     ))}
                 </div>
             ) : (
-                <table className="w-full border-collapse">
+                <table className="w-full border-collapse ">
                     <thead>
                         <tr>
                             <th className="py-2 px-4 text-start border-b">Product Name</th>
@@ -231,7 +231,7 @@ const AllItem = () => {
                 </table>
             )
             }
-            <div className="mt-4 flex justify-center items-center">
+            <div className="mt-4 ml-3 md:ml-0 md:flex justify-center items-center">
                 <button
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
@@ -243,7 +243,7 @@ const AllItem = () => {
                     <button
                         key={page}
                         onClick={() => handlePageChange(page)}
-                        className={`px-4 py-2 mx-1 ${currentPage === page ? "bg-blue-700 text-white" : "bg-blue-500 text-white"}`}
+                        className={`px-2 py-2 rounded mx-1 ${currentPage === page ? "bg-blue-700 text-white" : "bg-blue-500 text-white"}`}
                     >
                         {page}
                     </button>
